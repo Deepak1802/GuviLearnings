@@ -1,0 +1,49 @@
+* Port Address:
+    * In Computer, data should be given right process assigned by port number
+    * It is a address of process in given computer or node or host
+    * Every process in a computer has unique port number
+    * Port number is assigned at transport layer with given segment
+    * Port is also referred communication end point
+    * Fixed and Dynamic port numbers have range as per (0 - 65535)
+* IP Address :
+    * IP is a internet protocol
+    * Every node in the computer network is identified with the IP address only.
+    * They are two type IPV4 and IPV6.
+    * IP adress is used for logical addressing
+    * IP address is added with segment to form packets at network layer
+    * IP address is based on the location of device and it can be changed manually
+    * Range of IPV4 is 0.0.0.0 to 255.255.255.255 means 32 bits
+* MAC Address:
+    * MAC is Media Access Control
+    * Every Node in the LAN is identified with the help of MAC Address
+    * It given physical address of the device
+    * IP Gives locaion of node while MAC is name of the node in given LAN
+    * MAC is 12 digits Hex Code with 48 bits
+    * MAC is unique for given node assigned by manufacturer of computer / Router
+    * Example of my computer with
+        * Wifi - 18 : 47 : 3D : D7 : C8 : 73
+    * Seperator Can be (-), (.), (:)
+    * MAC Address is added with packet to form frame
+*HTTP Methods:
+
+    *GET
+        * The GET method requests a representation of the specified resource. Requests using GET should only retrieve data.
+    * HEAD
+        * The HEAD method asks for a response identical to a GET request, but without the response body.
+    * POST
+        * The POST method submits an entity to the specified resource, often causing a change in state or side effects on the server.
+    * PUT
+        * The PUT method replaces all current representations of the target resource with the request payload.
+    * DELETE
+        * The DELETE method deletes the specified resource.
+    * CONNECT
+        * The CONNECT method establishes a tunnel to the server identified by the target resource.
+    * OPTIONS
+        * The OPTIONS method describes the communication options for the target resource.
+    * TRACE
+        * The TRACE method performs a message loop-back test along the path to the target resource.
+    * PATCH
+        *The PATCH method applies partial modifications to a resource.
+
+
+    
