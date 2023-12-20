@@ -36,6 +36,12 @@ DELIVERY MODELS :
             With persistent connections, HTTP/1.1 assumes that a TCP connection should be kept open unless directly told to close. 
             This allows the client to send multiple requests along the same connection without waiting for a response to each, 
             greatly improving the performance of HTTP/1.1 over HTTP/1.0.
+        * Unfortunately, there is a natural bottleneck to this optimization strategy. Since multiple data packets cannot pass each 
+            other when traveling to the same destination, there are situations in which a request at the head of the queue that cannot 
+            retrieve its required resource will block all the requests behind it. This is known as head-of-line (HOL) blocking, 
+            and is a significant problem with optimizing connection efficiency in HTTP/1.1. Adding separate, parallel TCP connections 
+            could alleviate this issue, but there are limits to the number of concurrent TCP connections 
+            possible between a client and server, and each new connection requires significant resources.
 HTTP /2:
     * HTTP/2 began as the SPDY protocol, developed primarily at Google with the intention of reducing web page 
         load latency by using techniques such as compression, multiplexing, and prioritization.
@@ -54,3 +60,47 @@ HTTP /2:
         as normal when interacting with the new protocol.
     * The conversion of messages into binary allows HTTP/2 to try new approaches to data delivery not available in HTTP/1.1, 
         a contrast that is at the root of the practical differences between the two protocols.
+HTTP/2 — Advantages of the Binary Framing Layer:
+    * In HTTP/2, the binary framing layer encodes requests/responses and cuts them up into smaller packets of information, 
+        greatly increasing the flexibility of data transfer.
+    * Let’s take a closer look at how this works. As opposed to HTTP/1.1, which must make use of multiple TCP connections to lessen the effect of HOL blocking, 
+        HTTP/2 establishes a single connection object between the two machines.
+    * Within this connection there are multiple streams of data. Each stream consists of multiple messages in the familiar request/response format. 
+        Finally, each of these messages split into smaller units called frames.
+    * At the most granular level, the communication channel consists of a bunch of binary-encoded frames, each tagged to a particular stream. 
+        The identifying tags allow the connection to interleave these frames during transfer and reassemble them at the other end. 
+    * The interleaved requests and responses can run in parallel without blocking the messages behind them, a process called multiplexing. 
+        Multiplexing resolves the head-of-line blocking issue in HTTP/1.1 by ensuring that no message has to wait for another to finish.
+    * This also means that servers and clients can send concurrent requests and responses, 
+        allowing for greater control and more efficient connection management.
+    * Since multiplexing allows the client to construct multiple streams in parallel, these streams only need to make use of a single TCP connection. 
+        Having a single persistent connection per origin improves upon HTTP/1.1 by reducing the memory and processing footprint throughout the network. 
+        This results in better network and bandwidth utilization and thus decreases the overall operational cost.
+    * A single TCP connection also improves the performance of the HTTPS protocol, since the client and server can reuse the same secured session for multiple requests/responses. 
+        In HTTPS, during the TLS or SSL handshake, both parties agree on the use of a single key throughout the session. If the connection breaks, a new session starts, requiring a newly generated key for further communication. 
+        Thus, maintaining a single connection can greatly reduce the resources required for HTTPS performance. Note that, 
+        though HTTP/2 specifications do not make it mandatory to use the TLS layer, many major browsers only support HTTP/2 with HTTPS.
+    * Although the multiplexing inherent in the binary framing layer solves certain issues of HTTP/1.1, multiple streams awaiting the same resource can still cause performance issues. 
+        The design of HTTP/2 takes this into account, however, by using stream prioritization.
+HTTP/2 — Stream Prioritization:
+    * Stream prioritization not only solves the possible issue of requests competing for the same resource, but also allows developers to customize the relative weight of 
+        requests to better optimize application performance. In this section, we will break down the process of this prioritization 
+        in order to provide better insight into how you can leverage this feature of HTTP/2.
+    * As you know now, the binary framing layer organizes messages into parallel streams of data. When a client sends concurrent requests to a server, it can prioritize the responses it is requesting by assigning a weight between 1 and 256 to each stream. 
+        The higher number indicates higher priority. In addition to this, the client also states each stream’s dependency on another stream by specifying the ID of the stream on which it depends. 
+        If the parent identifier is omitted, the stream is considered to be dependent on the root stream.
+    * The channel contains six streams, each with a unique ID and associated with a specific weight. Stream 1 does not have a parent ID 
+        associated with it and is by default associated with the root node. All other streams have some parent ID marked. 
+        The resource allocation for each stream will be based on the weight that they hold and the dependencies they require. 
+        Streams 5 and 6 for example, which in the figure have been assigned the same weight and same parent stream, 
+        will have the same prioritization for resource allocation.
+    * The server uses this information to create a dependency tree, which allows the server to determine the order 
+        in which the requests will retrieve their data. Based on the streams in the preceding figure
+    * stream 1 is dependent on the root stream and there is no other stream derived from the root, so all the available resources 
+        will allocate to stream 1 ahead of the other streams. Since the tree indicates that stream 2 depends on the completion of 
+        stream 1, stream 2 will not proceed until the stream 1 task is completed. Now, let us look at streams 3 and 4. 
+        Both these streams depend on stream 2. As in the case of stream 1, stream 2 will get all the available resources ahead of 
+        streams 3 and 4. After stream 2 completes its task, streams 3 and 4 will get the resources; these are split in the ratio of 2:4 
+        as indicated by their weights, resulting in a higher chunk of the resources for stream 4. Finally, when stream 3 finishes, 
+        streams 5 and 6 will get the available resources in equal parts. This can happen before stream 4 has finished its task, even though stream 4 receives a higher chunk of resources; 
+        streams at a lower level are allowed to start as soon as the dependent streams on an upper level have finished.
