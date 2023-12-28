@@ -1,0 +1,191 @@
+//a.Print odd numbers in an array
+//Anonymous Function
+var numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+var printOddNumbers = function(arr) {
+    for (var i = 0; i < arr.length; i++) {
+        if (arr[i] % 2 !== 0) {
+            console.log(arr[i]);
+        }
+    }
+};
+
+printOddNumbers(numbers);
+//IIFE Function
+(function(array){
+             for(var i = 0 ; i< array.length ; i++){
+                        if(array[i]%2!=0){
+                           console.log(array[i])
+                        } 
+                   }
+             })([1,2,3,4,5,6,7,8,9])
+//Arrow Function
+var numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+oddNumbers = (array) => {
+                   for(var i = 0 ; i< array.length ; i++){
+                        if(array[i]%2!=0){
+                           console.log(array[i])
+                        } 
+                   }
+                        };
+
+oddNumbers(numbers);
+
+//b.Convert all the strings to title caps in a string array
+//Anonymous Function
+var stringArray = ["deepak", "nandhini", "achuthan", "kavitha"];
+var titlecasearray = function (str) {
+                    for (var i = 0; i < str.length; i++) {
+                      str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
+                    } 
+                    console.log(str.join(' '));
+                  };
+                  titlecasearray(stringArray);
+//IIFE Function
+(function (str) {
+                    for (var i = 0; i < str.length; i++) {
+                      str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
+                    } 
+                    console.log(str.join(' '));
+                  })(["apple", "banana", "cherry", "date"])
+//Arrow Function
+var stringArray = ["deepak", "nandhini", "achuthan", "kavitha"]; 
+  string =  (str) => {
+                    for (var i = 0; i < str.length; i++) {
+                      str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
+                    } 
+                    console.log(str.join(' '));
+                  };
+                  string(stringArray);
+//c.Sum of all numbers in an array
+
+// Anonymous Function
+var numbers = [1,2,3,4,5,6]; 
+  var sumnumbers = function(array){
+                  var sum = 0;
+                  for(var i = 0 ; i< array.length ; i++){
+                     sum = sum + array[i];
+                   }
+                   console.log(sum);
+                }
+            sumnumbers(numbers)
+// IIFE Function
+(function(array){
+    var sum = 0;
+                  for(var i = 0 ; i< array.length ; i++){
+                     sum = sum + array[i];
+                   }
+                   console.log(sum);
+})([1,2,3,4,5,6])
+//Arrow Function
+var numbers = [1,2,3,4,5,6]; 
+  sumnumbers = (array) => {
+                  var sum = 0;
+                  for(var i = 0 ; i< array.length ; i++){
+                     sum = sum + array[i];
+                   }
+                   console.log(sum);
+                }
+            sumnumbers(numbers)
+//d.Return all the prime numbers in an array
+//Anonymous Function
+var numbers = [1,2,3,4,5,6,7,8,9]; 
+  var sumnumbers = function(numArray){
+                      numArray = numArray.filter((number) => {
+                        for (var i = 2; i <= Math.sqrt(number); i++) {
+                          if (number % i === 0) return false;
+                        }
+                        return true;
+                      });
+                      console.log(numArray);
+                  }
+            sumnumbers(numbers)
+//IIFE Function
+(function(numArray){
+                      numArray = numArray.filter((number) => {
+                        for (var i = 2; i <= Math.sqrt(number); i++) {
+                          if (number % i === 0) return false;
+                        }
+                        return true;
+                      });
+                      console.log(numArray);
+                  })([1,2,3,4,5,6,7,8,9])
+//Arrow Function
+var numbers = [1,2,3,4,5,6,7,8,9]; 
+  sumnumbers = (numArray)=>{
+                      numArray = numArray.filter((number) => {
+                        for (var i = 2; i <= Math.sqrt(number); i++) {
+                          if (number % i === 0) return false;
+                        }
+                        return true;
+                      });
+                      console.log(numArray);
+                  }
+            sumnumbers(numbers)
+//e.Return all the palindromes in an array
+//Anonymous Function
+var words = ["level", "apple", "radar", "banana", "madam"];
+
+var getPalindromes = function(arr) {
+    return arr.filter(function(word) {
+        return word === word.split('').reverse().join('');
+    });
+};
+
+console.log(getPalindromes(words));
+//IIFE Function
+var words = ["level", "apple", "radar", "banana", "madam"];
+
+var getPalindromes = (function(arr) {
+    return arr.filter(function(word) {
+        return word === word.split('').reverse().join('');
+    });
+})(words);
+
+console.log(getPalindromes);
+//Arrow Function
+var words = ["level", "apple", "radar", "banana", "madam"];
+
+// Using arrow function
+var getPalindromes = arr => arr.filter(word => word === word.split('').reverse().join(''));
+
+console.log(getPalindromes(words));
+
+//f.Return median of two sorted arrays of the same size
+//Anonymous Function
+let findMedian = function(arr1, arr2) {
+    let mergedArray = arr1.concat(arr2);
+    let sortedArray = mergedArray.sort((a, b) => a - b);
+    let length = sortedArray.length;
+
+    if (length % 2 === 0) {
+        // If the length is even, return the average of the middle two elements.
+        return (sortedArray[length / 2 - 1] + sortedArray[length / 2]) / 2;
+    } else {
+        // If the length is odd, return the middle element.
+        return sortedArray[Math.floor(length / 2)];
+    }
+};
+let arr1 = [1, 3, 5, 7, 9];
+let arr2 = [2, 4, 6, 8, 10];
+let median = findMedian(arr1, arr2);
+console.log("Median:", median);
+//IIFE Function
+let median = (function(arr1, arr2) {
+    let mergedArray = arr1.concat(arr2);
+    let sortedArray = mergedArray.sort((a, b) => a - b);
+    let length = sortedArray.length;
+    if (length % 2 === 0) {
+        // If the length is even, return the average of the middle two elements.
+        return (sortedArray[length / 2 - 1] + sortedArray[length / 2]) / 2;
+    } else {
+        // If the length is odd, return the middle element.
+        return sortedArray[Math.floor(length / 2)];
+    }
+})([1, 3, 5,8,10], [2, 4, 6,7,9]);
+
+// Example usage:
+console.log("Median:", median);
+//g.Remove duplicates from an array
+
