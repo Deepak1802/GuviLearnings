@@ -188,4 +188,28 @@ let median = (function(arr1, arr2) {
 // Example usage:
 console.log("Median:", median);
 //g.Remove duplicates from an array
+//Anonymous Function
+let removeDuplicates = function(arr) {
+  return arr.filter(function(value, index, self) {
+    return self.indexOf(value) === index;
+  });
+};
+
+let originalArray = [1, 2, 3, 4, 4, 5, 6, 6, 7];
+let uniqueArray = removeDuplicates(originalArray);
+
+console.log(uniqueArray);
+//IIFE Function
+let originalArray = [1, 2, 3, 4, 4, 5, 6, 6, 7];
+
+let uniqueArray = (function(arr) {
+  return arr.filter(function(value, index, self) {
+    return self.indexOf(value) === index;
+  });
+})(originalArray);
+
+console.log(uniqueArray);
+//h.Rotate an array by k times
+//Anonymous Function
+
 
