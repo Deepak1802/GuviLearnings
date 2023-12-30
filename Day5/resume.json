@@ -1,0 +1,73 @@
+{
+    "basics": {
+      "Name": "Deepak Angamuthu",
+      "email": "dpk.civil@gmail.com",
+      "phone": "+91 9843307365",
+      "degree": "B.E Civil Engineering",
+      "website": "https://plum-dasie-39.tiiny.site",
+      "summary": "As an accomplished civil Engineer with six years of hands-on experience in overseeing construction projects and ensuring their successful completion I have developed a robust foundation in project management design and quality control Leveraging this background I transitioned to a dynamic role as an ERP Consultant and SQL Report Writer accumulating two years of expertise in optimizing business processes and data reporting solutions",
+      "location": {
+        "address": "Chennai",
+        "postalCode": "638 183",
+        "city": "Chrompet",
+        "region": "TamilNadu)"
+      },
+      "profiles": [
+        {
+          "network": "linkedin",
+          "username": "Deepak Angamuthu",
+          "url": "www.linkedin.com/in/deepak-angamuthu-76a65727b"
+        }
+      ]
+    },
+    "work": [
+      {
+        "company": "Syvasoft Business Solutions",
+        "position": "ERP Consultant",
+        "website": "www.syvasoft.com",
+        "startDate": "2023-11-01",
+        "endDate": "",
+        "highlights": [
+          "Proficient in writing complex SQL queries to extract data from relational databases.",
+          "• Use SQL SELECT statements to filter, sort, and aggregate data as needed for reporting.",
+          "• Have a strong understanding of the underlying database structure and relationships.",
+          "• Familiarity with database design principles and normalization.",
+          "• Design and structure reports to present data in a meaningful and understandable format.",
+          "• Consider user requirements and business needs when designing report layouts.",
+          "• Implement parameters in reports to allow users to customize and filter data based on their requirements.",
+          "• Conduct thorough analysis of the organization's business processes and requirements.",
+          "• Identify opportunities for improvement and automation through ERP solutions.",
+          "• Develop a comprehensive implementation plan, considering timelines, resources, and budget constraints.",
+          "• Oversee the migration of data from existing systems to the ERP platform.",
+          "• Ensure seamless data flow and communication between different systems."
+        ]
+      }
+    ],
+    "education": [
+      {
+        "institution": "Sree Sastha Institute of Engineering and Technology",
+        "area": "B.E Civil Engineering",
+        "studyType": "Full Time",
+        "startDate": "2011-08-15",
+        "endDate": "2015-04-15",
+        "gpa": "6.9%"
+      }
+    ],
+    "skills": [
+      {
+        "name": "('JAVASCRIPT, SQL')",
+        "level": "Intermidiate"
+      }
+    ],
+    "languages": [
+      {
+        "language": "English, Tamil, Hindi, Malayalam",
+        "fluency": "Read & Speak & Write"
+      }
+    ],
+    "interests": [
+      {
+        "name": "('Cricket')"
+      }
+    ]
+  }
