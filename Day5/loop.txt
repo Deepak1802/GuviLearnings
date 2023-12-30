@@ -1,0 +1,38 @@
+//For Loop
+var array = [ {"vehicle":"Vespa", "engine": "B6"}];
+         for (var i = 0; i < array.length; i++){
+            document.write("<br><br>index value: " + i);
+            var obj = array[i];
+            for (var key in obj){
+               var value = obj[key];
+               document.write("<br> - " + key + ": " + value);
+            }
+         }
+//For of
+var array = [{vehicle:'Ford'}, {vehicle:'Maruti'}];
+         for (var result of array){
+            console.log(result.vehicle + "<br />");
+         }
+//For in
+var array= [{
+               "vehicle": "car",
+               "model": 2015,
+            },{
+               "vehicle": "bike",
+               "model": 2022,
+            }
+         ];
+         for (var key in array ) {
+            if (array.hasOwnProperty(key)) {
+               console.log(array[key].model+"<br>");
+            }
+         }
+//ForEach
+var jsonArray = [
+  { "name": "Deepak", "age": 30 },
+  { "name": "Sundar", "age": 25 },
+  { "name": "Raju", "age": 40 }
+];
+jsonArray.forEach(function(item) {
+  console.log(item.name + ' is ' + item.age + ' years old');
+});
